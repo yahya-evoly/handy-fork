@@ -32,7 +32,9 @@ _(Add new owner instructions above this line as numbered items.)_
 ## Repo layout
 
 - `origin` = `https://github.com/yahya-evoly/handy-fork` (ours, push here)
-- `upstream` = `https://github.com/cjpais/Handy` (read-only; push URL is set to `DISABLED`)
+- Upstream is `https://github.com/cjpais/Handy` (read-only). **Don't add it as a git remote**:
+  T3 Code then lists all of upstream's PRs on its pull requests page. Fetch it by URL
+  instead (see "Syncing with upstream").
 - `gh` default repo is the fork. Still pass `-R yahya-evoly/handy-fork` explicitly.
   **Never open PRs, issues or discussions on cjpais/Handy** unless Yahya explicitly asks.
 - Upstream's own guidance is in `AGENTS.md` (architecture, i18n rules, notices, style).
@@ -55,8 +57,8 @@ _(Add new owner instructions above this line as numbered items.)_
 Every time work starts on a new feature (and at least every few weeks), sync first:
 
 ```bash
-git fetch upstream
-git checkout main && git merge upstream/main   # resolve conflicts, keep our features working
+git fetch https://github.com/cjpais/Handy main
+git checkout main && git merge FETCH_HEAD   # resolve conflicts, keep our features working
 git push origin main
 ```
 
