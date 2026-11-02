@@ -3,6 +3,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./RecordingOverlay.css";
 import { ForkLanguageTag } from "./ForkLanguageTag";
+import { useForkTranslating } from "./forkTranslating";
 import { commands, events } from "@/bindings";
 import type {
   Notice,
@@ -92,6 +93,7 @@ const RecordingOverlay: React.FC = () => {
   const capRef = useRef<HTMLDivElement>(null);
   const pinnedRef = useRef(true);
   const direction = getLanguageDirection(i18n.language);
+  const forkTranslating = useForkTranslating(); // FORK
 
   useEffect(() => {
     const setupEventListeners = async () => {
@@ -276,9 +278,11 @@ const RecordingOverlay: React.FC = () => {
   const fmtTime = (s: number) =>
     `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
-  const transcribingLabel = modelLoading
-    ? t("overlay.loadingModel")
-    : t("overlay.transcribing");
+  const transcribingLabel = forkTranslating
+    ? t("overlay.translating") // FORK: see forkTranslating.ts
+    : modelLoading
+      ? t("overlay.loadingModel")
+      : t("overlay.transcribing");
 
   // ---- Shared building blocks (one visual language for every overlay form) ----
   const waveform = (

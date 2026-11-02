@@ -989,6 +989,7 @@
     },
     "transcribing": "Расшифровка...",
     "processing": "Обработка...",
+    "translating": "Перевод...",
     "loadingModel": "Загрузка модели..."
   },
   "secureInput": {

@@ -23,11 +23,11 @@
      the card's max footprint (--ov-work-w for compact, --ov-open-w for Live),
      since the card is anchored flush to the screen edge in CSS. Keep overlay.rs
      in sync when these change. */
-  /* FORK: rest/pill widths raised (172px / 184px upstream) to fit the
-     EN/FR/AUTO language tag next to the dot. */
-  --ov-rest-w: 196px; /* resting compact pill (minimal, recording) -- roomy enough
+  /* FORK: rest/pill widths raised (172px / 184px upstream) so the EN/FR/AUTO
+     language tag next to the dot keeps clear of the centered waveform. */
+  --ov-rest-w: 212px; /* resting compact pill (minimal, recording) -- roomy enough
                          for the English working label before the grow starts */
-  --ov-pill-w: 196px; /* base width / Live pill before it opens or collapses */
+  --ov-pill-w: 212px; /* base width / Live pill before it opens or collapses */
   --ov-work-w: 216px; /* working pill (transcribing / polishing) -- wide enough to
                          center longer labels; shared by Live (collapsed) + minimal */
   --ov-open-w: 392px; /* Live panel, expanded */

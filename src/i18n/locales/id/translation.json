@@ -989,6 +989,7 @@
     },
     "transcribing": "Mentranskripsikan...",
     "processing": "Memproses...",
+    "translating": "Menerjemahkan...",
     "loadingModel": "Memuat model..."
   },
   "secureInput": {

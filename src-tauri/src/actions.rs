@@ -748,7 +748,7 @@ impl ShortcutAction for TranscribeAction {
                     // as an error, so it never starts a batch run.
                     let transcription_time = Instant::now();
                     let transcription_result =
-                        crate::fork_language::finish(tm.transcribe_recording(samples));
+                        crate::fork_language::finish(&ah, tm.transcribe_recording(samples));
 
                     // Await WAV save and verify
                     let wav_saved = match wav_handle.await {

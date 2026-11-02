@@ -989,6 +989,7 @@
     },
     "transcribing": "מתמלל...",
     "processing": "מעבד...",
+    "translating": "מתרגם...",
     "loadingModel": "טוען מודל..."
   },
   "secureInput": {

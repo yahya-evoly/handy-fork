@@ -52,6 +52,7 @@ pub fn set(language: Option<&'static str>) {
 /// warm up the translator so a translation after the recording is quick.
 pub fn start_recording(app: &AppHandle, language: Option<&'static str>) {
     set(language);
+    show_translating(app, false);
     let _ = app.emit_to(
         "recording_overlay",
         "fork-dictation-language",
@@ -131,7 +132,10 @@ fn gate(
 
 /// Called with a recording's transcription: translates it into the pinned
 /// language when it was spoken in the other one, then unpins the language.
-pub fn finish(result: anyhow::Result<Transcription>) -> anyhow::Result<Transcription> {
+pub fn finish(
+    app: &AppHandle,
+    result: anyhow::Result<Transcription>,
+) -> anyhow::Result<Transcription> {
     let target = current();
     clear();
     let Some(target) = target else {
@@ -144,7 +148,11 @@ pub fn finish(result: anyhow::Result<Transcription>) -> anyhow::Result<Transcrip
     if transcription.text.trim().is_empty() {
         return Ok(transcription);
     }
-    match crate::fork_translate::translate(&transcription.text, source, target) {
+    // The overlay's working pill reads "Translating..." while this runs.
+    show_translating(app, true);
+    let translated = crate::fork_translate::translate(&transcription.text, source, target);
+    show_translating(app, false);
+    match translated {
         Some(translated) => {
             info!("Translated dictation from '{source}' to '{target}'");
             transcription.text = translated;
@@ -168,6 +176,12 @@ fn translation_source(target: &str, decision: Option<&LanguageDecision>) -> Opti
     LANGUAGES
         .into_iter()
         .find(|language| *language == spoken && *language != target)
+}
+
+/// Switch the overlay's working label between "Transcribing..." and
+/// "Translating..." (src/overlay/forkTranslating.ts).
+fn show_translating(app: &AppHandle, translating: bool) {
+    let _ = app.emit_to("recording_overlay", "fork-translating", translating);
 }
 
 fn other_language(language: &str) -> &'static str {

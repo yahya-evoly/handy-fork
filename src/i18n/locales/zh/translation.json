@@ -989,6 +989,7 @@
     },
     "transcribing": "正在转录...",
     "processing": "处理中...",
+    "translating": "正在翻译...",
     "loadingModel": "正在加载模型..."
   },
   "secureInput": {

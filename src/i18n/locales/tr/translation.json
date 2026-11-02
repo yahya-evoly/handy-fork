@@ -989,6 +989,7 @@
     },
     "transcribing": "Transkribe ediliyor...",
     "processing": "İşleniyor...",
+    "translating": "Çevriliyor...",
     "loadingModel": "Model yükleniyor..."
   },
   "secureInput": {

@@ -989,6 +989,7 @@
     },
     "transcribing": "Transcriberen...",
     "processing": "Verwerken...",
+    "translating": "Vertalen...",
     "loadingModel": "Model laden..."
   },
   "secureInput": {

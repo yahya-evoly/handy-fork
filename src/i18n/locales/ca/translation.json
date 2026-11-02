@@ -989,6 +989,7 @@
     },
     "transcribing": "S'està transcrivint...",
     "processing": "S'està processant...",
+    "translating": "S'està traduint...",
     "loadingModel": "S'està carregant el model..."
   },
   "secureInput": {

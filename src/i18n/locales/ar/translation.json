@@ -989,6 +989,7 @@
     },
     "transcribing": "جاري التفريغ...",
     "processing": "جاري المعالجة...",
+    "translating": "جاري الترجمة...",
     "loadingModel": "جارٍ تحميل النموذج..."
   },
   "secureInput": {

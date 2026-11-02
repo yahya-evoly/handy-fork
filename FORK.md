@@ -27,6 +27,14 @@ loaded into every Claude session via `CLAUDE.md`. These rules override defaults.
    anything Yahya must do (ideally nothing).
 7. Never mention Claude as author or co-author in commits or PR descriptions.
 
+8. **Finish features completely; never ship the bare minimum** (Yahya, 2026-11-02, after
+   having to ask twice). A feature includes every user-visible state it creates: the
+   recording pill/overlay, settings UI, labels in all locales, light and dark mode, Minimal
+   and Live overlay styles. If the backend gains a step (e.g. translating), the UI must show
+   it. Verify visually before reporting: render the overlay with Playwright + system Chrome
+   (`chromium.launch({ channel: "chrome" })`, mock `window.__TAURI_INTERNALS__`, emit the
+   events) and look at the screenshots.
+
 _(Add new owner instructions above this line as numbered items.)_
 
 ## Repo layout
@@ -104,9 +112,12 @@ Every deviation from upstream, so syncs can be checked against it:
   ≥97% sure the other language was spoken is the recording transcribed as spoken and then
   translated with Apple's on-device Translation framework (much better than Canary's own
   translation). The framework needs a free main run loop: call it off the main thread
-  (6 s timeout in Swift); it can't be unit-tested under `cargo test`.
+  (6 s timeout in Swift); it can't be unit-tested under `cargo test`. While it runs, the
+  pill's working label reads "Translating..." (`fork-translating` event,
+  `src/overlay/forkTranslating.ts`, one-line hook on `transcribingLabel` in
+  `RecordingOverlay.tsx`, `overlay.translating` key in every locale).
 - **Language tag in the recording pill** (`src/overlay/ForkLanguageTag.tsx`, styles at the
-  end of `RecordingOverlay.css`, pill widths `--ov-rest-w`/`--ov-pill-w` raised to 196px,
+  end of `RecordingOverlay.css`, pill widths `--ov-rest-w`/`--ov-pill-w` raised to 212px,
   `overlay.dictationLanguage.*` i18n keys). Shows EN / FR / AUTO next to the recording dot;
   the backend announces the mode via the `fork-dictation-language` event
   (`fork_language::start_recording`).

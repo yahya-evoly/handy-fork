@@ -989,6 +989,7 @@
     },
     "transcribing": "ट्रांसक्राइब हो रहा है...",
     "processing": "प्रोसेस हो रहा है...",
+    "translating": "अनुवाद हो रहा है...",
     "loadingModel": "मॉडल लोड हो रहा है..."
   },
   "secureInput": {

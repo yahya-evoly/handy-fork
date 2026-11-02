@@ -989,6 +989,7 @@
     },
     "transcribing": "Đang chuyển đổi...",
     "processing": "Đang xử lý...",
+    "translating": "Đang dịch...",
     "loadingModel": "Đang tải mô hình..."
   },
   "secureInput": {

@@ -989,6 +989,7 @@
     },
     "transcribing": "Přepisuji...",
     "processing": "Zpracovávám...",
+    "translating": "Překládám...",
     "loadingModel": "Načítání modelu..."
   },
   "secureInput": {
