@@ -23,9 +23,11 @@
      the card's max footprint (--ov-work-w for compact, --ov-open-w for Live),
      since the card is anchored flush to the screen edge in CSS. Keep overlay.rs
      in sync when these change. */
-  --ov-rest-w: 172px; /* resting compact pill (minimal, recording) -- roomy enough
+  /* FORK: rest/pill widths raised (172px / 184px upstream) to fit the
+     EN/FR/AUTO language tag next to the dot. */
+  --ov-rest-w: 196px; /* resting compact pill (minimal, recording) -- roomy enough
                          for the English working label before the grow starts */
-  --ov-pill-w: 184px; /* base width / Live pill before it opens or collapses */
+  --ov-pill-w: 196px; /* base width / Live pill before it opens or collapses */
   --ov-work-w: 216px; /* working pill (transcribing / polishing) -- wide enough to
                          center longer labels; shared by Live (collapsed) + minimal */
   --ov-open-w: 392px; /* Live panel, expanded */
@@ -456,4 +458,22 @@
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* FORK: dictation language tag next to the recording dot (ForkLanguageTag.tsx). */
+.fork-lang-tag {
+  margin-left: 5px;
+  padding: 1px 3px;
+  border: 1px solid var(--s-border);
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 12px;
+  letter-spacing: 0.04em;
+  color: var(--s-faint);
+  white-space: nowrap;
+}
+.fork-lang-tag.fork-lang-en,
+.fork-lang-tag.fork-lang-fr {
+  color: var(--s-muted);
 }

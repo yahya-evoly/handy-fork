@@ -982,6 +982,11 @@
     }
   },
   "overlay": {
+    "dictationLanguage": {
+      "auto": "AUTO",
+      "en": "EN",
+      "fr": "FR"
+    },
     "transcribing": "Transcribiendo...",
     "processing": "Procesando...",
     "loadingModel": "Cargando modelo..."

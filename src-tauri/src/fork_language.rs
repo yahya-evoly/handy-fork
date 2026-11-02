@@ -13,6 +13,7 @@
 
 use crate::settings::{AppSettings, LanguageDetectionMode};
 use std::sync::Mutex;
+use tauri::{AppHandle, Emitter};
 
 static OVERRIDE: Mutex<Option<&'static str>> = Mutex::new(None);
 
@@ -23,6 +24,17 @@ pub const LANGUAGE_BINDINGS: &[(&str, &str)] =
 /// Pin (or with `None`, unpin) the language for the recording being started.
 pub fn set(language: Option<&'static str>) {
     *OVERRIDE.lock().unwrap_or_else(|e| e.into_inner()) = language;
+}
+
+/// A recording is starting: pin its language and tell the overlay which mode
+/// it is in ("en", "fr" or "auto"), so the recording pill can show it.
+pub fn start_recording(app: &AppHandle, language: Option<&'static str>) {
+    set(language);
+    let _ = app.emit_to(
+        "recording_overlay",
+        "fork-dictation-language",
+        language.unwrap_or("auto"),
+    );
 }
 
 /// Forget the pinned language once its recording has been transcribed.

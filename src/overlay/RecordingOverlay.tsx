@@ -2,6 +2,7 @@ import { listen } from "@tauri-apps/api/event";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./RecordingOverlay.css";
+import { ForkLanguageTag } from "./ForkLanguageTag";
 import { commands, events } from "@/bindings";
 import type {
   Notice,
@@ -316,6 +317,7 @@ const RecordingOverlay: React.FC = () => {
     <div className="sbase">
       <div className="sbase-l">
         <span className={`sdot ${captureReady ? "ready" : "arming"}`} />
+        <ForkLanguageTag />
       </div>
       {waveform}
       <div className="sbase-r">

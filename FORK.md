@@ -96,5 +96,10 @@ Every deviation from upstream, so syncs can be checked against it:
   "Dictate in English" (default Option+Fn) and "Dictate in French" (default Cmd+Fn) pin
   the transcription language for that recording; the regular shortcut stays on Auto.
   Yahya's model is Canary 1B v2 (en+fr with explicit language, no reload between the two).
+- **Language tag in the recording pill** (`src/overlay/ForkLanguageTag.tsx`, styles at the
+  end of `RecordingOverlay.css`, pill widths `--ov-rest-w`/`--ov-pill-w` raised to 196px,
+  `overlay.dictationLanguage.*` i18n keys). Shows EN / FR / AUTO next to the recording dot;
+  the backend announces the mode via the `fork-dictation-language` event
+  (`fork_language::start_recording`).
 - **Fork tooling**: `FORK.md`, `scripts/fork/`, `docs/agents/` (Matt Pocock skills
   config), extra lines in `CLAUDE.md`.

@@ -982,6 +982,11 @@
     }
   },
   "overlay": {
+    "dictationLanguage": {
+      "auto": "AUTO",
+      "en": "EN",
+      "fr": "FR"
+    },
     "transcribing": "Транскрибиране...",
     "processing": "Обработка...",
     "loadingModel": "Зареждане на модела..."

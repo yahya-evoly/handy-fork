@@ -982,6 +982,11 @@
     }
   },
   "overlay": {
+    "dictationLanguage": {
+      "auto": "AUTO",
+      "en": "EN",
+      "fr": "FR"
+    },
     "transcribing": "텍스트로 변환 중...",
     "processing": "처리 중...",
     "loadingModel": "모델 로딩 중..."
