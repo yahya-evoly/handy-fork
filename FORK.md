@@ -87,5 +87,12 @@ Every deviation from upstream, so syncs can be checked against it:
 - **Self-updater forced off** (`src-tauri/src/settings.rs`,
   `update_checks_forced_disabled`). The updater would install official releases over our
   build. Upstream changes arrive via git sync instead.
+- **Per-language dictation shortcuts** (`src-tauri/src/fork_language.rs`, plus one-line
+  hooks in `actions.rs`, `transcription_coordinator.rs`, `settings.rs` default bindings,
+  `managers/transcription.rs`, `managers/transcription/live.rs`, `GeneralSettings.tsx`,
+  and the `transcribe_english` / `transcribe_french` i18n keys in every locale).
+  "Dictate in English" (default Option+Fn) and "Dictate in French" (default Cmd+Fn) pin
+  the transcription language for that recording; the regular shortcut stays on Auto.
+  Yahya's model is Canary 1B v2 (en+fr with explicit language, no reload between the two).
 - **Fork tooling**: `FORK.md`, `scripts/fork/`, `docs/agents/` (Matt Pocock skills
   config), extra lines in `CLAUDE.md`.

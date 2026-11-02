@@ -348,6 +348,14 @@
           "transcribe_with_post_process": {
             "name": "पोस्ट-प्रोसेसिङ हटकी",
             "description": "वैकल्पिक: तपाईंको ट्रान्सक्रिप्सनमा सधैँ AI पोस्ट-प्रोसेसिङ लागू गर्ने छुट्टै हटकी।"
+          },
+          "transcribe_english": {
+            "name": "Dictate in English",
+            "description": "Always transcribes in English, whatever language is set above."
+          },
+          "transcribe_french": {
+            "name": "Dictate in French",
+            "description": "Always transcribes in French, whatever language is set above."
           }
         },
         "errors": {

@@ -107,6 +107,8 @@ pub trait ShortcutAction: Send + Sync {
 // Transcribe Action
 struct TranscribeAction {
     post_process: bool,
+    /// FORK: language this shortcut pins (see `fork_language`).
+    language: Option<&'static str>,
 }
 
 /// Field name for structured output JSON schema
@@ -478,6 +480,7 @@ impl ShortcutAction for TranscribeAction {
     fn start(&self, app: &AppHandle, binding_id: &str, _shortcut_str: &str) {
         let start_time = Instant::now();
         debug!("TranscribeAction::start called for binding: {}", binding_id);
+        crate::fork_language::set(self.language);
 
         // Load model in the background
         let tm = app.state::<Arc<TranscriptionManager>>();
@@ -745,6 +748,7 @@ impl ShortcutAction for TranscribeAction {
                     // as an error, so it never starts a batch run.
                     let transcription_time = Instant::now();
                     let transcription_result = tm.transcribe_recording(samples);
+                    crate::fork_language::clear();
 
                     // Await WAV save and verify
                     let wav_saved = match wav_handle.await {
@@ -1050,12 +1054,25 @@ pub static ACTION_MAP: Lazy<HashMap<String, Arc<dyn ShortcutAction>>> = Lazy::ne
         "transcribe".to_string(),
         Arc::new(TranscribeAction {
             post_process: false,
+            language: None,
         }) as Arc<dyn ShortcutAction>,
     );
     map.insert(
         "transcribe_with_post_process".to_string(),
-        Arc::new(TranscribeAction { post_process: true }) as Arc<dyn ShortcutAction>,
+        Arc::new(TranscribeAction {
+            post_process: true,
+            language: None,
+        }) as Arc<dyn ShortcutAction>,
     );
+    for (binding, language) in crate::fork_language::LANGUAGE_BINDINGS {
+        map.insert(
+            binding.to_string(),
+            Arc::new(TranscribeAction {
+                post_process: false,
+                language: Some(language),
+            }) as Arc<dyn ShortcutAction>,
+        );
+    }
     map.insert(
         "cancel".to_string(),
         Arc::new(CancelAction) as Arc<dyn ShortcutAction>,

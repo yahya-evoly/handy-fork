@@ -348,6 +348,14 @@
           "transcribe_with_post_process": {
             "name": "Горячая клавиша постобработки",
             "description": "Специальное сочетание клавиш для ИИ-постобработки вашей транскрипции."
+          },
+          "transcribe_english": {
+            "name": "Dictate in English",
+            "description": "Always transcribes in English, whatever language is set above."
+          },
+          "transcribe_french": {
+            "name": "Dictate in French",
+            "description": "Always transcribes in French, whatever language is set above."
           }
         },
         "errors": {

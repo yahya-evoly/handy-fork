@@ -348,6 +348,14 @@
           "transcribe_with_post_process": {
             "name": "Гаряча клавіша постобробки",
             "description": "Необов'язково: Спеціальна гаряча клавіша, яка завжди застосовує AI-постобробку до вашої транскрипції."
+          },
+          "transcribe_english": {
+            "name": "Dictate in English",
+            "description": "Always transcribes in English, whatever language is set above."
+          },
+          "transcribe_french": {
+            "name": "Dictate in French",
+            "description": "Always transcribes in French, whatever language is set above."
           }
         },
         "errors": {

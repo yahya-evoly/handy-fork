@@ -1004,7 +1004,7 @@ impl TranscriptionManager {
             Some(outcome) => outcome,
             None => self.decode_batch(audio)?,
         };
-        let settings = get_settings(&self.app_handle);
+        let settings = crate::fork_language::apply(get_settings(&self.app_handle));
         let language = outcome
             .setup
             .spoken_language(outcome.model_detected_language.as_deref());
@@ -1068,7 +1068,7 @@ impl TranscriptionManager {
             return Err(anyhow::anyhow!("Model is not loaded for transcription."));
         };
 
-        let settings = get_settings(&self.app_handle);
+        let settings = crate::fork_language::apply(get_settings(&self.app_handle));
         // Validate against the model that's actually loaded (which can differ
         // from settings.selected_model when a caller loaded a specific model —
         // e.g. the --transcribe-file path's --model), not the persisted

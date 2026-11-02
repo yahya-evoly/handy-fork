@@ -987,6 +987,36 @@ pub fn get_default_settings() -> AppSettings {
             current_binding: default_post_process_shortcut.to_string(),
         },
     );
+    // FORK: per-language dictation shortcuts (see `fork_language`).
+    #[cfg(target_os = "macos")]
+    let (english_shortcut, french_shortcut) = ("option+fn", "command+fn");
+    #[cfg(not(target_os = "macos"))]
+    let (english_shortcut, french_shortcut) = ("", "");
+    for (id, name, description, shortcut) in [
+        (
+            "transcribe_english",
+            "Dictate in English",
+            "Transcribes your speech, always in English.",
+            english_shortcut,
+        ),
+        (
+            "transcribe_french",
+            "Dictate in French",
+            "Transcribes your speech, always in French.",
+            french_shortcut,
+        ),
+    ] {
+        bindings.insert(
+            id.to_string(),
+            ShortcutBinding {
+                id: id.to_string(),
+                name: name.to_string(),
+                description: description.to_string(),
+                default_binding: shortcut.to_string(),
+                current_binding: shortcut.to_string(),
+            },
+        );
+    }
     bindings.insert(
         "cancel".to_string(),
         ShortcutBinding {

@@ -348,6 +348,14 @@
           "transcribe_with_post_process": {
             "name": "Tecla de post procesamiento",
             "description": "Opcional: Una tecla de acceso rápido dedicada que siempre aplica post procesamiento con IA a tu transcripción."
+          },
+          "transcribe_english": {
+            "name": "Dictate in English",
+            "description": "Always transcribes in English, whatever language is set above."
+          },
+          "transcribe_french": {
+            "name": "Dictate in French",
+            "description": "Always transcribes in French, whatever language is set above."
           }
         },
         "errors": {

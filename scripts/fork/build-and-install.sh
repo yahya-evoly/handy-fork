@@ -2,14 +2,18 @@
 # FORK: build this fork and install it as /Applications/Handy.app.
 #   scripts/fork/build-and-install.sh            build + install + relaunch
 #   scripts/fork/build-and-install.sh --no-install   build + sign only
+#   scripts/fork/build-and-install.sh --skip-build   sign + install the last build
 # Keeps the bundle id com.pais.handy so settings, history and downloaded
 # models in ~/Library/Application Support/com.pais.handy are reused.
 # The previously installed app is kept at ~/.config/handy-fork/previous/Handy.app
 # for rollback (scripts/fork/rollback.sh).
 set -euo pipefail
 
-INSTALL=1
-[[ "${1:-}" == "--no-install" ]] && INSTALL=0
+INSTALL=1; BUILD=1
+case "${1:-}" in
+  --no-install) INSTALL=0 ;;
+  --skip-build) BUILD=0 ;;   # install the last build as-is
+esac
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 CONF_DIR="$HOME/.config/handy-fork"
@@ -21,6 +25,7 @@ export PATH="$HOME/.cargo/bin:$HOME/.bun/bin:$PATH"
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
 cd "$ROOT"
 
+if [[ $BUILD == 1 ]]; then
 # 1. Required VAD model (not in git).
 VAD="src-tauri/resources/models/silero-vad-v6.2-F32.gguf"
 if [[ ! -s "$VAD" ]]; then
@@ -31,6 +36,7 @@ fi
 # 2. Build the .app only (no dmg, no updater artifacts: those need cjpais's key).
 bun install --frozen-lockfile
 bun run tauri build --bundles app --config '{"bundle":{"createUpdaterArtifacts":false}}'
+fi
 
 APP_BUILT="$ROOT/src-tauri/target/release/bundle/macos/Handy.app"
 [[ -d "$APP_BUILT" ]] || { echo "Build output not found: $APP_BUILT" >&2; exit 1; }

@@ -348,6 +348,14 @@
           "transcribe_with_post_process": {
             "name": "후처리 단축키",
             "description": "선택 사항: 항상 AI 후처리를 적용하는 전용 단축키입니다."
+          },
+          "transcribe_english": {
+            "name": "Dictate in English",
+            "description": "Always transcribes in English, whatever language is set above."
+          },
+          "transcribe_french": {
+            "name": "Dictate in French",
+            "description": "Always transcribes in French, whatever language is set above."
           }
         },
         "errors": {

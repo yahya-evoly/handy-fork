@@ -348,6 +348,14 @@
           "transcribe_with_post_process": {
             "name": "Raccourci de post-traitement",
             "description": "Facultatif : Un raccourci dédié qui applique toujours le post-traitement IA à votre transcription."
+          },
+          "transcribe_english": {
+            "name": "Dicter en anglais",
+            "description": "Transcrit toujours en anglais, quelle que soit la langue choisie ci-dessus."
+          },
+          "transcribe_french": {
+            "name": "Dicter en français",
+            "description": "Transcrit toujours en français, quelle que soit la langue choisie ci-dessus."
           }
         },
         "errors": {
