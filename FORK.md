@@ -17,7 +17,7 @@ loaded into every Claude session via `CLAUDE.md`. These rules override defaults.
 3. **Claude is the orchestrator.** Spawn and guide subagents as needed. Brief them
    precisely, review their output, and integrate it. Subagents follow these same rules.
 4. **"Done" means installed.** A feature isn't finished until it's merged to `main`,
-   pushed to the fork, built, and installed as `/Applications/Handy.app` on tthe Mac
+   pushed to the fork, built, and installed as `/Applications/Handy.app` on the Mac
    (`scripts/fork/build-and-install.sh`), with the app relaunched and running.
 5. Use the Matt Pocock engineering skills (plugin `mattpocock-skills`, enabled for this
    project) where they help, answering their questions yourself instead of asking Yahya.
