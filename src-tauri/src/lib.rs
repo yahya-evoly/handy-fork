@@ -11,6 +11,7 @@ mod clipboard;
 mod commands;
 pub mod engine_supervisor;
 mod fork_language;
+mod fork_translate;
 mod helpers;
 mod input;
 mod language_detection;

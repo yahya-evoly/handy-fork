@@ -230,10 +230,13 @@ impl Plan {
             identified.elapsed.as_millis()
         );
         match language {
-            Some(language) => LanguageDecision {
-                language: Some(language),
-                source: LanguageSource::Detected,
-            },
+            Some(language) => crate::fork_language::gate_detection(
+                LanguageDecision {
+                    language: Some(language),
+                    source: LanguageSource::Detected,
+                },
+                &identified.candidates,
+            ),
             None => {
                 warn!("Language detection returned no usable language; {transcribing_as}");
                 fallback_decision

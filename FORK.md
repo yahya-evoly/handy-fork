@@ -93,9 +93,18 @@ Every deviation from upstream, so syncs can be checked against it:
   hooks in `actions.rs`, `transcription_coordinator.rs`, `settings.rs` default bindings,
   `managers/transcription.rs`, `managers/transcription/live.rs`, `GeneralSettings.tsx`,
   and the `transcribe_english` / `transcribe_french` i18n keys in every locale).
-  "Dictate in English" (default Option+Fn) and "Dictate in French" (default Cmd+Fn) pin
-  the transcription language for that recording; the regular shortcut stays on Auto.
+  "Dictate in English" and "Dictate in French" force their language for that recording;
+  the regular shortcut stays on Auto. Defaults are Option+Fn / Cmd+Fn, but Yahya set
+  **Cmd+Fn = Auto, Ctrl+Fn = English, Option+Fn = French** (2026-11-02); don't change them.
   Yahya's model is Canary 1B v2 (en+fr with explicit language, no reload between the two).
+- **Translation on forced shortcuts** (`fork_language::gate_detection`, hooked into
+  `language_detection::Plan::decide`; `fork_language::finish` in `actions.rs`;
+  `src/fork_translate.rs`, `swift/fork_translation.swift`, `build_fork.rs` + two lines in
+  `build.rs`). Owner's rule: shortcuts keep forcing their language; only when the detector is
+  ≥97% sure the other language was spoken is the recording transcribed as spoken and then
+  translated with Apple's on-device Translation framework (much better than Canary's own
+  translation). The framework needs a free main run loop: call it off the main thread
+  (6 s timeout in Swift); it can't be unit-tested under `cargo test`.
 - **Language tag in the recording pill** (`src/overlay/ForkLanguageTag.tsx`, styles at the
   end of `RecordingOverlay.css`, pill widths `--ov-rest-w`/`--ov-pill-w` raised to 196px,
   `overlay.dictationLanguage.*` i18n keys). Shows EN / FR / AUTO next to the recording dot;

@@ -1,6 +1,11 @@
+#[path = "build_fork.rs"]
+mod build_fork; // FORK
+
 fn main() {
     #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
     build_apple_intelligence_bridge();
+    #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
+    build_fork::build_fork_translation_bridge(); // FORK
 
     generate_tray_translations();
 
